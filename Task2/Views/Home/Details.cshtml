@@ -1,0 +1,39 @@
+﻿@model Country
+@{
+    Layout = "_Layout";
+}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Информация о стране @Model.Name.Official</h5>
+        <p class="card-text">
+            <strong>Название:</strong> @Model.Name.Common;
+            <br />            
+            <strong>Полное название:</strong> @Model.Name.Official
+            <br />
+            <strong>Регион:</strong> @Model.Region
+            <br />
+            <strong>Столицы:</strong>
+            <ul>
+                @if (Model.Capital != null)
+                {
+                    @foreach (var capital in Model.Capital)
+                    {
+                        <li>@capital</li>
+                    }
+                }
+            </ul>
+            <br />
+            <strong>Языки:</strong>
+            <ul>
+                @foreach (var language in Model.Languages)
+                {
+                    <li>@language.Value</li>
+                }
+            </ul>
+            <br />
+            <a asp-action="Index" asp-controller="Home" class="btn btn-sm btn-info">Назад</a>
+
+        </p>
+
+    </div>
+</div>

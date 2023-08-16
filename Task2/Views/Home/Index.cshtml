@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Country>
+@{
+    Layout = "_Layout";
+}
+<div class="container mt-4 mb-4">
+    <form asp-controller="Home" asp-action="Index" method="get" class="mb-3">
+        <div class="input-group">
+            <input type="text" name="NameOfCountry" class="form-control" placeholder="Поиск по наименованию страны" />
+            <button type="submit" class="btn btn-primary">Найти</button>
+        </div>
+    </form>
+
+    <div class="table-responsive">
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th>Страна</th>
+                    <th>Столица</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var country in Model)
+                {
+                    <tr>
+                        <td>@country.Name.Common</td>
+                        <td>
+                            @if (country.Capital != null)
+                            {
+                                <p>
+                                    @foreach (var capital in country.Capital)
+                                    {
+                                        <span>@capital</span>
+                                    }
+                                </p>
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-controller="Home" asp-route-nameOfCountry="@country.Name.Official" class="btn btn-sm btn-info">Детали</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
